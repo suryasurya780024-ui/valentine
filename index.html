@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: black;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: url("wife.jpg") center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(0.6);
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    text-shadow: 0 0 15px hotpink;
+    padding: 0 15px;
+}
+
+.buttons {
+    position: relative;
+    width: 100%;
+    height: 120px;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+#yes {
+    background: hotpink;
+    color: white;
+}
+
+#no {
+    background: #555;
+    color: white;
+    position: absolute;
+    left: 55%;
+    top: 0;
+}
+
+#message {
+    display: none;
+    font-size: 1.8rem;
+    margin-top: 40px;
+    text-align: center;
+    color: pink;
+    text-shadow: 0 0 20px red;
+    padding: 0 20px;
+}
+
+/* Hearts */
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 32px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Do you love me Afrin? ❤️</h1>
+
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+
+    <div id="message">
+        Love you my dear Ratchchasi ❤️
+    </div>
+</div>
+
+<audio id="song">
+    <source src="uyirae.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const msg = document.getElementById("message");
+const song = document.getElementById("song");
+
+// NO button escapes touch
+function moveNo() {
+    const maxX = window.innerWidth - 100;
+    const maxY = window.innerHeight - 200;
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseover", moveNo);
+
+// YES button action
+yesBtn.addEventListener("click", () => {
+    msg.style.display = "block";
+
+    song.volume = 0.8;
+    song.play();
+
+    setTimeout(() => {
+        song.pause();
+    }, 30000);
+
+    setInterval(createHeart, 180);
+});
+
+// Hearts creation
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+</script>
+
+</body>
+</html>
